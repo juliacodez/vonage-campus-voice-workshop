@@ -32,6 +32,12 @@ Save the code sample to `index.js` and then run `node index.js`.
 
 **PHP**
 
+This example uses the Slim Framework (v3) microframework for some lightweight input/output handling and routing. To include this in your project, use Composer:
+
+`composer require nexmo/client slim/slim:3.8`
+
+With the dependencies in place, here's some code to give a `/webhooks/answer` endpoint that returns an NCCO:
+
 ```php
 <?php
 use \Psr\Http\Message\ServerRequestInterface as Request;
@@ -57,11 +63,7 @@ $app->get('/webhooks/answer', function (Request $request, Response $response) {
 $app->run();
 ```
 
-Save the code into `index.php`. This example uses the Slim Framework (v3) microframework for some lightweight input/output handling and routing. To include this in your project, use Composer:
-
-`composer require slim/slim:3.8`
-
-Then try using the built-in PHP webserver to serve the code:
+Save the code into `index.php`. Then try using the built-in PHP webserver to serve the code:
 
 `php -S localhost:3000`
 
