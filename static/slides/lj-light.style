@@ -1,6 +1,5 @@
 embeddedFonts: []
    [fonts/Inconsolata-Regular.ttf, fonts/Inconsolata-Bold.ttf, fonts/Inconsolata-Bold.ttf, fonts/Inconsolata-Regular.ttf]
-   [fonts/ecgothic.ttf, fonts/ecgothic.ttf, fonts/ecgothic.ttf, fonts/ecgothic.ttf]
    [fonts/GentiumPlus-R.ttf, fonts/GentiumPlus-R.ttf, fonts/GentiumPlus-R.ttf, fonts/GentiumPlus-R.ttf]
    [fonts/AndikaNewBasic-R.ttf, fonts/AndikaNewBasic-B.ttf, fonts/AndikaNewBasic-BI.ttf, fonts/AndikaNewBasic-I.ttf]
 

@@ -5,6 +5,10 @@
 Getting Started with Voice API
 ##############################
 
+.. class:: titleslideinfo
+
+    Lorna Mitchell, Developer Relations
+
 .. Change to a standard page
 .. raw:: pdf
 
@@ -30,11 +34,23 @@ Workshop plan:
 
     TextAnnotation "First up: the abbreviation you're going to hear the most today!"
 
+.. Change to a title page
+.. raw:: pdf
+
+    PageBreak titlePage
+
+NCCO
+====
+
+.. Change to a standard page
+.. raw:: pdf
+
+    PageBreak standardPage
 
 NCCO: Nexmo Call Control Object
 ===============================
 
-NCCOs describe the flow of the call. They are a series of stepsi described in JSON, such as this example showing text-to-speech:
+A series of steps: e.g. text-to-speech
 
 .. code:: json
 
@@ -50,6 +66,8 @@ NCCOs describe the flow of the call. They are a series of stepsi described in JS
 You can find a full reference here: https://developer.nexmo.com/voice/voice-api/ncco-reference
 
 .. raw:: pdf
+
+    TextAnnotation "NCCOs describe the flow of the call. They are a series of steps described in JSON"
 
     TextAnnotation "NCCOs can contain multiple objects in the array, they are done in order and then the call ends when there are no more"
 
@@ -108,8 +126,21 @@ There are two types of conversation that you might use:
 
   TextAnnotation "Use a Conference when you need to know which conversation to have new users join, e.g. conference call or an outgoing call to connect to an existing call when it is answered"
 
-The Voice API
-=============
+.. Change to a title page
+.. raw:: pdf
+
+    PageBreak titlePage
+
+Nexmo Voice API
+===============
+
+.. Change to a standard page
+.. raw:: pdf
+
+    PageBreak standardPage
+
+Nexmo Voice API
+===============
 
 Make an API call to:
 
@@ -152,12 +183,10 @@ You will find lots of code examples and the API reference on https://developer.n
 NCCO + API = Many Good Things
 =============================
 
-.. class:: bigger
-
-  Combining the NCCOs to control program flow and the API calls to react to events allows us to create interesting and fully-featured applications.
 
 .. raw:: pdf
 
+    TextAnnotation "Combining the NCCOs to control program flow and the API calls to react to events allows us to create interesting and fully-featured applications."
   TextAnnotation "Some things can be done with either technique, but some things need one or the other! Expect to need both."
 
 .. Change to a standard page
@@ -170,15 +199,15 @@ Voice API Examples
 
 *  IVR
 
-    -  Incoming call, serve NCCO to answer it
-    -  Prompt user for DTMF input
-    -  DTMF input arrives as a webhook, return a new NCCO
+  -  Incoming call, serve NCCO to answer it
+  -  Prompt user for DTMF input
+  -  DTMF input arrives as a webhook, return a new NCCO
 
 *  Proxy
 
-    -  Incoming call, serve NCCO to answer it
-    -  Put user into conference
-    -  API call to place outgoing call to other user, with NCCO to join same conference
+  -  Incoming call, serve NCCO to answer it
+  -  Put user into conference
+  -  API call to place outgoing call to other user, with NCCO to join same conference
 
 .. raw:: pdf
 
@@ -219,11 +248,11 @@ Voice Webhooks
 
 Webhooks can be expected:
 
--  When the call is answered, an HTTP request to your application's ``answer_url``
--  When events such as "ringing", "answered", "completed" occur, HTTP requests to your application's ``event_url``
--  When a user enters digits during an ``input`` action, an HTTP request to the URL specified in the NCCO
--  When a recording is completed and available, an HTTP request to the specified ``recording_url``
--  When a ``notify`` action occurs
+-  When the call is answered, an HTTP request to the ``answer_url``
+-  When events such as "ringing", "answered", "completed" occur, HTTP requests to the ``event_url``
+-  Keypad digits from an ``input`` action are sent to the specified URL
+-  When a recording is completed, an HTTP request to the ``recording_url``
+-  When a ``notify`` action in an NCCO is processed
 
 .. raw:: pdf
 
@@ -236,6 +265,8 @@ Webhooks can be expected:
   TextAnnotation "When recording is ready, webhook to ``recording_url`` has a link to the file to download"
 
   TextAnnotation "``notify`` is an NCCO action that sends a webhook to a URL. The NCCO continues afterwards, useful for progress indicators"
+
+  TextAnnotation "There are some tricks to working with webhooks locally: I'd like to share some tips"
 
 Webhooks on Dev Platforms
 =========================
@@ -336,4 +367,8 @@ Pieces of the Voice API
 Further Reading
 ===============
 
-Lots of links at https://github.com/nexmo-community/vonage-campus-voice-workshop
+* Exercises at https://voice-workshop.nexmodev.com/
+* Our blog https://nexmo.com/blog
+* Tell us what you think! ``@NexmoDev`` on twitter
+
+
