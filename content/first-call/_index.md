@@ -3,7 +3,7 @@ title: "Make Your First Call"
 weight : 15
 ---
 
-
+**Write some code that calls your cellphone**
 
 You will need:
 
@@ -16,16 +16,14 @@ You will need:
 Optional, but recommended:
 
 * The [Nexmo CLI tool](https://developer.nexmo.com/tools) may be a nicer way to work with the number purchase, application creation, etc.
-* The [Server SDK](https://developer.nexmo.com/tools) for your tech stack - we have PHP, Python, Ruby, NodeJS, Java, .NET (and a semi-official [Go SDK](https://github.com/nexmo-community/nexmo-go)
+* The [Server SDK](https://developer.nexmo.com/tools) for your tech stack - we have PHP, Python, Ruby, NodeJS, Java, .NET (and a semi-official [Go SDK](https://github.com/nexmo-community/nexmo-go))
 
 Here's the code to get you started, replace the placeholder values in your chosen code:
 
-Key |	Description
--- | --
-`NEXMO_APPLICATION_PRIVATE_KEY_PATH` | The path to the private key file you saved when creating the application
-`NEXMO_APPLICATION_ID` | The UUID of your application
-`NEXMO_NUMBER` | Your Nexmo number that the call will be made from. For example `447700900000`.
-`TO_NUMBER` | The number you would like to call to in E.164 format. For example `447700900001`.
+ * `NEXMO_APPLICATION_PRIVATE_KEY_PATH`: The path to the private key file you saved when creating the application
+ * `NEXMO_APPLICATION_ID`: The UUID of your application
+ * `NEXMO_NUMBER`: Your Nexmo number that the call will be made from. For example `447700900000`.
+ * `TO_NUMBER`: The number you would like to call to in [E.164](https://en.wikipedia.org/wiki/E.164) format. For example `447700900001` (note that this _must_ include the dialling code, so if it's a US number, it should start with `1`).
 
 **Javascript**
 
@@ -89,6 +87,8 @@ $call = $client->calls()->create([
 print_r($call);
 ```
 
+Put this code into `index.php`, and run it with `php -f index.php`.
+
 Check out the [code examples in these and other languages](https://developer.nexmo.com/voice/voice-api/code-snippets/make-an-outbound-call) on the Nexmo Developer Portal.
 
 **Run your code** and answer your phone!
@@ -104,5 +104,4 @@ Go back to the dashboard and configure the application's `event_url` endpoint. Y
 * your application (probably using [ngrok](https://ngrok.com)), we'll be doing another incoming webhook in the next exercise anyway
 * a tool such as the [Voice Event Logger](https://github.com/Nexmo/voice-event-logger)
 * a general webhook receiver like Requestbin (still available at <http://bin.on.dockerize.io/> and <http://requestbin.net>) or [Postbin](https://postb.in/)
-
 

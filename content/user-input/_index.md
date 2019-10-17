@@ -61,6 +61,8 @@ Put this code into `index.js` and start the server with `node index.js`.
 
 **PHP**
 
+Again, there is a Slim Framework dependency so use `composer require slim/slim:3.11` to bring that into your project.
+
 ```php
 <?php
 use \Psr\Http\Message\ServerRequestInterface as Request;
@@ -104,9 +106,7 @@ $app->post('/webhooks/dtmf', function (Request $request, Response $response) {
 $app->run();
 ```
 
-Again, there is a Slim Framework dependency so use `composer require slim/slim:3.8` to bring that into your project.
-
-Run the code by using the built-in webserver:
+Place this code in `index.php`, then use the built-in webserver:
 
 `php -S localhost:3000`
 

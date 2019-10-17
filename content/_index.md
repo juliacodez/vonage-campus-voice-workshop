@@ -25,7 +25,7 @@ Here are some resources you may find useful, including all the links from the pr
 
 * [Nexmo Customer Dashboard](https://dashboard.nexmo.com)
 * [Voice API Reference](https://developer.nexmo.com/api/voice)
-* [NCCO Reference](https://developer.nexmo.com/voice/voice-api/ncco-reference)
+* [NCCO Reference](https://developer.nexmo.com/voice/voice-api/ncco-reference) and [NCCO examples to inspire you](https://nexmo-community.github.io/ncco-examples/)
 * [Webhook Reference](https://developer.nexmo.com/voice/voice-api/webhook-reference)
 * [Server SDKs](https://developer.nexmo.com/tools) in Java, PHP, NodeJS, .NET, Python, Ruby and Golang
 * [Code Snippets for Nexmo Voice API](https://developer.nexmo.com/voice/voice-api/overview#code-snippets)
