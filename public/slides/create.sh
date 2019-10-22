@@ -12,7 +12,8 @@ rst2pdf ${FILE}.rst \
     -s "lj-light,lj-code-light"\
     --output=${FILE}.pdf
 
-./annotations_to_notes.sh $FILE
+python notes.py ${FILE}.pdf > notes.rst
+rst2pdf notes.rst -s "notes.style"
 
 pdfjam --suffix handout --nup '4x3' --frame 'true' --noautoscale 'false' --delta '0.2cm 2cm' --scale '0.9' --landscape -- ${FILE}.pdf -
 

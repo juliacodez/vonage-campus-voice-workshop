@@ -12,20 +12,20 @@
     <title>Interact with your user :: Voice Workshop</title>
 
     
-    <link href="/css/nucleus.css?1569575881" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1569575881" rel="stylesheet">
-    <link href="/css/hybrid.css?1569575881" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1569575881" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1569575881" rel="stylesheet">
-    <link href="/css/auto-complete.css?1569575881" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1569575881" rel="stylesheet">
-    <link href="/css/theme.css?1569575881" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1569575881" rel="stylesheet">
+    <link href="/css/nucleus.css?1571745707" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1571745707" rel="stylesheet">
+    <link href="/css/hybrid.css?1571745707" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1571745707" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1571745707" rel="stylesheet">
+    <link href="/css/auto-complete.css?1571745707" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1571745707" rel="stylesheet">
+    <link href="/css/theme.css?1571745707" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1571745707" rel="stylesheet">
     
-      <link href="/css/theme-blue.css?1569575881" rel="stylesheet">
+      <link href="/css/theme-blue.css?1571745707" rel="stylesheet">
     
 
-    <script src="/js/jquery-3.3.1.min.js?1569575881"></script>
+    <script src="/js/jquery-3.3.1.min.js?1571745707"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -95,14 +95,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1569575881"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1569575881"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1571745707"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1571745707"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/voice-workshop.nexmodev.com\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1569575881"></script>
+<script type="text/javascript" src="/js/search.js?1571745707"></script>
 
     
   </div>
@@ -287,94 +287,90 @@
 <p><strong>JavaScript</strong></p>
 
 <p>Prepare your dependencies: <code>npm install nexmo express body-parser</code></p>
-
-<pre><code class="language-js">const app = require('express')()
-const bodyParser = require('body-parser')
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#ff79c6">const</span> app <span style="color:#ff79c6">=</span> require(<span style="color:#f1fa8c">&#39;express&#39;</span>)()
+<span style="color:#ff79c6">const</span> bodyParser <span style="color:#ff79c6">=</span> require(<span style="color:#f1fa8c">&#39;body-parser&#39;</span>)
 
 app.use(bodyParser.json())
 
-const onInboundCall = (request, response) =&gt; {
-  const ncco = [
+<span style="color:#ff79c6">const</span> onInboundCall <span style="color:#ff79c6">=</span> (request, response) =&gt; {
+  <span style="color:#ff79c6">const</span> ncco <span style="color:#ff79c6">=</span> [
     {
-      action: 'talk',
-      text: 'Please enter a digit'
+      action<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#39;talk&#39;</span>,
+      text<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#39;Please enter a digit&#39;</span>
     },
     {
-      action: 'input',
-      eventUrl: [`${request.protocol}://${request.get('host')}/webhooks/dtmf`]
+      action<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#39;input&#39;</span>,
+      eventUrl<span style="color:#ff79c6">:</span> [<span style="color:#f1fa8c">`</span><span style="color:#f1fa8c">${</span>request.protocol<span style="color:#f1fa8c">}</span><span style="color:#f1fa8c">://</span><span style="color:#f1fa8c">${</span>request.get(<span style="color:#f1fa8c">&#39;host&#39;</span>)<span style="color:#f1fa8c">}</span><span style="color:#f1fa8c">/webhooks/dtmf`</span>]
     }
   ]
 
   response.json(ncco)
 }
 
-const onInput = (request, response) =&gt; {
-  const dtmf = request.body.dtmf
+<span style="color:#ff79c6">const</span> onInput <span style="color:#ff79c6">=</span> (request, response) =&gt; {
+  <span style="color:#ff79c6">const</span> dtmf <span style="color:#ff79c6">=</span> request.body.dtmf
 
-  const ncco = [{
-    action: 'talk',
-    text: `You pressed ${dtmf}`
+  <span style="color:#ff79c6">const</span> ncco <span style="color:#ff79c6">=</span> [{
+    action<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#39;talk&#39;</span>,
+    text<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">`You pressed </span><span style="color:#f1fa8c">${</span>dtmf<span style="color:#f1fa8c">}</span><span style="color:#f1fa8c">`</span>
   }]
 
   response.json(ncco)
 }
 
 app
-  .get('/webhooks/answer', onInboundCall)
-  .post('/webhooks/dtmf', onInput)
+  .get(<span style="color:#f1fa8c">&#39;/webhooks/answer&#39;</span>, onInboundCall)
+  .post(<span style="color:#f1fa8c">&#39;/webhooks/dtmf&#39;</span>, onInput)
 
-app.listen(3000)
-</code></pre>
-
+app.listen(<span style="color:#bd93f9">3000</span>)
+</code></pre></div>
 <p>Put this code into <code>index.js</code> and start the server with <code>node index.js</code>.</p>
 
 <p><strong>PHP</strong></p>
 
-<pre><code class="language-php">&lt;?php
-use \Psr\Http\Message\ServerRequestInterface as Request;
-use \Psr\Http\Message\ResponseInterface as Response;
+<p>Again, there is a Slim Framework dependency so use <code>composer require slim/slim:3.11</code> to bring that into your project.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#ff79c6">&lt;?php</span>
+<span style="color:#ff79c6">use</span> \Psr\Http\Message\ServerRequestInterface <span style="color:#ff79c6">as</span> Request;
+<span style="color:#ff79c6">use</span> \Psr\Http\Message\ResponseInterface <span style="color:#ff79c6">as</span> Response;
 
-require 'vendor/autoload.php';
+<span style="color:#ff79c6">require</span> <span style="color:#f1fa8c">&#39;vendor/autoload.php&#39;</span>;
 
-$app = new \Slim\App;
+<span style="color:#8be9fd;font-style:italic">$app</span> <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">new</span> \Slim\App;
 
-$app-&gt;get('/webhooks/answer', function (Request $request, Response $response) {
-    $uri = $request-&gt;getUri();
-    $ncco = [
+<span style="color:#8be9fd;font-style:italic">$app</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">get</span>(<span style="color:#f1fa8c">&#39;/webhooks/answer&#39;</span>, <span style="color:#ff79c6">function</span> (Request <span style="color:#8be9fd;font-style:italic">$request</span>, Response <span style="color:#8be9fd;font-style:italic">$response</span>) {
+    <span style="color:#8be9fd;font-style:italic">$uri</span> <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">$request</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">getUri</span>();
+    <span style="color:#8be9fd;font-style:italic">$ncco</span> <span style="color:#ff79c6">=</span> [
         [
-            'action' =&gt; 'talk',
-            'text' =&gt; 'Please enter a digit'
+            <span style="color:#f1fa8c">&#39;action&#39;</span> <span style="color:#ff79c6">=&gt;</span> <span style="color:#f1fa8c">&#39;talk&#39;</span>,
+            <span style="color:#f1fa8c">&#39;text&#39;</span> <span style="color:#ff79c6">=&gt;</span> <span style="color:#f1fa8c">&#39;Please enter a digit&#39;</span>
         ],
         [
-            'action' =&gt; 'input',
-            'eventUrl' =&gt; [
-                $uri-&gt;getScheme().'://'.$uri-&gt;getHost().':'.$uri-&gt;getPort().'/webhooks/dtmf'
+            <span style="color:#f1fa8c">&#39;action&#39;</span> <span style="color:#ff79c6">=&gt;</span> <span style="color:#f1fa8c">&#39;input&#39;</span>,
+            <span style="color:#f1fa8c">&#39;eventUrl&#39;</span> <span style="color:#ff79c6">=&gt;</span> [
+                <span style="color:#8be9fd;font-style:italic">$uri</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">getScheme</span>()<span style="color:#ff79c6">.</span><span style="color:#f1fa8c">&#39;://&#39;</span><span style="color:#ff79c6">.</span><span style="color:#8be9fd;font-style:italic">$uri</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">getHost</span>()<span style="color:#ff79c6">.</span><span style="color:#f1fa8c">&#39;:&#39;</span><span style="color:#ff79c6">.</span><span style="color:#8be9fd;font-style:italic">$uri</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">getPort</span>()<span style="color:#ff79c6">.</span><span style="color:#f1fa8c">&#39;/webhooks/dtmf&#39;</span>
             ]
         ]
     ];
 
-    return $response-&gt;withJson($ncco);
+    <span style="color:#ff79c6">return</span> <span style="color:#8be9fd;font-style:italic">$response</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">withJson</span>(<span style="color:#8be9fd;font-style:italic">$ncco</span>);
 });
 
-$app-&gt;post('/webhooks/dtmf', function (Request $request, Response $response) {
-    $params = $request-&gt;getParsedBody();
+<span style="color:#8be9fd;font-style:italic">$app</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">post</span>(<span style="color:#f1fa8c">&#39;/webhooks/dtmf&#39;</span>, <span style="color:#ff79c6">function</span> (Request <span style="color:#8be9fd;font-style:italic">$request</span>, Response <span style="color:#8be9fd;font-style:italic">$response</span>) {
+    <span style="color:#8be9fd;font-style:italic">$params</span> <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">$request</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">getParsedBody</span>();
 
-    $ncco = [
+    <span style="color:#8be9fd;font-style:italic">$ncco</span> <span style="color:#ff79c6">=</span> [
         [
-            'action' =&gt; 'talk',
-            'text' =&gt; 'You pressed '.$params['dtmf']
+            <span style="color:#f1fa8c">&#39;action&#39;</span> <span style="color:#ff79c6">=&gt;</span> <span style="color:#f1fa8c">&#39;talk&#39;</span>,
+            <span style="color:#f1fa8c">&#39;text&#39;</span> <span style="color:#ff79c6">=&gt;</span> <span style="color:#f1fa8c">&#39;You pressed &#39;</span><span style="color:#ff79c6">.</span><span style="color:#8be9fd;font-style:italic">$params</span>[<span style="color:#f1fa8c">&#39;dtmf&#39;</span>]
         ]
     ];
 
-    return $response-&gt;withJson($ncco);
+    <span style="color:#ff79c6">return</span> <span style="color:#8be9fd;font-style:italic">$response</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">withJson</span>(<span style="color:#8be9fd;font-style:italic">$ncco</span>);
 });
 
-$app-&gt;run();
-</code></pre>
-
-<p>Again, there is a Slim Framework dependency so use <code>composer require slim/slim:3.8</code> to bring that into your project.</p>
-
-<p>Run the code by using the built-in webserver:</p>
+<span style="color:#8be9fd;font-style:italic">$app</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">run</span>();
+</code></pre></div>
+<p>Place this code in <code>index.php</code>, then use the built-in webserver:</p>
 
 <p><code>php -S localhost:3000</code></p>
 
@@ -498,19 +494,19 @@ $app-&gt;run();
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1569575881"></script>
-    <script src="/js/perfect-scrollbar.min.js?1569575881"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1569575881"></script>
-    <script src="/js/jquery.sticky.js?1569575881"></script>
-    <script src="/js/featherlight.min.js?1569575881"></script>
-    <script src="/js/highlight.pack.js?1569575881"></script>
+    <script src="/js/clipboard.min.js?1571745707"></script>
+    <script src="/js/perfect-scrollbar.min.js?1571745707"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1571745707"></script>
+    <script src="/js/jquery.sticky.js?1571745707"></script>
+    <script src="/js/featherlight.min.js?1571745707"></script>
+    <script src="/js/highlight.pack.js?1571745707"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1569575881"></script>
-    <script src="/js/learn.js?1569575881"></script>
-    <script src="/js/hugo-learn.js?1569575881"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1571745707"></script>
+    <script src="/js/learn.js?1571745707"></script>
+    <script src="/js/hugo-learn.js?1571745707"></script>
 
-    <link href="/mermaid/mermaid.css?1569575881" rel="stylesheet" />
-    <script src="/mermaid/mermaid.js?1569575881"></script>
+    <link href="/mermaid/mermaid.css?1571745707" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1571745707"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

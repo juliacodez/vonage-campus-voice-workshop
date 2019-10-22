@@ -12,20 +12,20 @@
     <title>Make Your First Call :: Voice Workshop</title>
 
     
-    <link href="/css/nucleus.css?1569575881" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1569575881" rel="stylesheet">
-    <link href="/css/hybrid.css?1569575881" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1569575881" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1569575881" rel="stylesheet">
-    <link href="/css/auto-complete.css?1569575881" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1569575881" rel="stylesheet">
-    <link href="/css/theme.css?1569575881" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1569575881" rel="stylesheet">
+    <link href="/css/nucleus.css?1571745707" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1571745707" rel="stylesheet">
+    <link href="/css/hybrid.css?1571745707" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1571745707" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1571745707" rel="stylesheet">
+    <link href="/css/auto-complete.css?1571745707" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1571745707" rel="stylesheet">
+    <link href="/css/theme.css?1571745707" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1571745707" rel="stylesheet">
     
-      <link href="/css/theme-blue.css?1569575881" rel="stylesheet">
+      <link href="/css/theme-blue.css?1571745707" rel="stylesheet">
     
 
-    <script src="/js/jquery-3.3.1.min.js?1569575881"></script>
+    <script src="/js/jquery-3.3.1.min.js?1571745707"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -95,14 +95,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1569575881"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1569575881"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1571745707"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1571745707"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/voice-workshop.nexmodev.com\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1569575881"></script>
+<script type="text/javascript" src="/js/search.js?1571745707"></script>
 
     
   </div>
@@ -272,6 +272,8 @@
 
 	
 
+<p><strong>Write some code that calls your cellphone</strong></p>
+
 <p>You will need:</p>
 
 <ul>
@@ -286,77 +288,75 @@
 
 <ul>
 <li>The <a href="https://developer.nexmo.com/tools">Nexmo CLI tool</a> may be a nicer way to work with the number purchase, application creation, etc.</li>
-<li>The <a href="https://developer.nexmo.com/tools">Server SDK</a> for your tech stack - we have PHP, Python, Ruby, NodeJS, Java, .NET (and a semi-official <a href="https://github.com/nexmo-community/nexmo-go">Go SDK</a></li>
+<li>The <a href="https://developer.nexmo.com/tools">Server SDK</a> for your tech stack - we have PHP, Python, Ruby, NodeJS, Java, .NET (and a semi-official <a href="https://github.com/nexmo-community/nexmo-go">Go SDK</a>)</li>
 </ul>
 
 <p>Here&rsquo;s the code to get you started, replace the placeholder values in your chosen code:</p>
 
-<p>Key |   Description
-&ndash; | &ndash;
-<code>NEXMO_APPLICATION_PRIVATE_KEY_PATH</code> | The path to the private key file you saved when creating the application
-<code>NEXMO_APPLICATION_ID</code> | The UUID of your application
-<code>NEXMO_NUMBER</code> | Your Nexmo number that the call will be made from. For example <code>447700900000</code>.
-<code>TO_NUMBER</code> | The number you would like to call to in E.164 format. For example <code>447700900001</code>.</p>
+<ul>
+<li><code>NEXMO_APPLICATION_PRIVATE_KEY_PATH</code>: The path to the private key file you saved when creating the application</li>
+<li><code>NEXMO_APPLICATION_ID</code>: The UUID of your application</li>
+<li><code>NEXMO_NUMBER</code>: Your Nexmo number that the call will be made from. For example <code>447700900000</code>.</li>
+<li><code>TO_NUMBER</code>: The number you would like to call to in <a href="https://en.wikipedia.org/wiki/E.164">E.164</a> format. For example <code>447700900001</code> (note that this <em>must</em> include the dialling code, so if it&rsquo;s a US number, it should start with <code>1</code>).</li>
+</ul>
 
 <p><strong>Javascript</strong></p>
 
 <p>Prepare your dependencies: <code>npm install nexmo</code></p>
-
-<pre><code class="language-js">const nexmo = new Nexmo({
-  apiKey: NEXMO_API_KEY,
-  apiSecret: NEXMO_API_SECRET,
-  applicationId: NEXMO_APPLICATION_ID,
-  privateKey: NEXMO_APPLICATION_PRIVATE_KEY_PATH
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#ff79c6">const</span> nexmo <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">new</span> Nexmo({
+  apiKey<span style="color:#ff79c6">:</span> NEXMO_API_KEY,
+  apiSecret<span style="color:#ff79c6">:</span> NEXMO_API_SECRET,
+  applicationId<span style="color:#ff79c6">:</span> NEXMO_APPLICATION_ID,
+  privateKey<span style="color:#ff79c6">:</span> NEXMO_APPLICATION_PRIVATE_KEY_PATH
 })
 
 nexmo.calls.create({
-  to: [{
-    type: 'phone',
-    number: TO_NUMBER
+  to<span style="color:#ff79c6">:</span> [{
+    type<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#39;phone&#39;</span>,
+    number<span style="color:#ff79c6">:</span> TO_NUMBER
   }],
-  from: {
-    type: 'phone',
-    number: NEXMO_NUMBER
+  from<span style="color:#ff79c6">:</span> {
+    type<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#39;phone&#39;</span>,
+    number<span style="color:#ff79c6">:</span> NEXMO_NUMBER
   },
-  ncco: [{
-    &quot;action&quot;: &quot;talk&quot;,
-    &quot;text&quot;: &quot;This is a text to speech call from Nexmo&quot;
+  ncco<span style="color:#ff79c6">:</span> [{
+    <span style="color:#f1fa8c">&#34;action&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;talk&#34;</span>,
+    <span style="color:#f1fa8c">&#34;text&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;This is a text to speech call from Nexmo&#34;</span>
   }]
 })
-</code></pre>
-
+</code></pre></div>
 <p><strong>PHP</strong></p>
 
 <p>Prepare your dependencies: <code>composer require nexmo/client</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#ff79c6">&lt;?php</span>
+<span style="color:#ff79c6">require</span> <span style="color:#f1fa8c">&#39;/vendor/autoload.php&#39;</span>;
 
-<pre><code class="language-php">&lt;?php
-require '/vendor/autoload.php';
-
-$keypair = new \Nexmo\Client\Credentials\Keypair(
+<span style="color:#8be9fd;font-style:italic">$keypair</span> <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">new</span> \Nexmo\Client\Credentials\Keypair(
     file_get_contents(NEXMO_APPLICATION_PRIVATE_KEY_PATH),
     NEXMO_APPLICATION_ID
 );
-$client = new \Nexmo\Client($keypair);
+<span style="color:#8be9fd;font-style:italic">$client</span> <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">new</span> \Nexmo\Client(<span style="color:#8be9fd;font-style:italic">$keypair</span>);
 
-$call = $client-&gt;calls()-&gt;create([
-    'to' =&gt; [[
-        'type' =&gt; 'phone',
-        'number' =&gt; TO_NUMBER
+<span style="color:#8be9fd;font-style:italic">$call</span> <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">$client</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">calls</span>()<span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">create</span>([
+    <span style="color:#f1fa8c">&#39;to&#39;</span> <span style="color:#ff79c6">=&gt;</span> [[
+        <span style="color:#f1fa8c">&#39;type&#39;</span> <span style="color:#ff79c6">=&gt;</span> <span style="color:#f1fa8c">&#39;phone&#39;</span>,
+        <span style="color:#f1fa8c">&#39;number&#39;</span> <span style="color:#ff79c6">=&gt;</span> TO_NUMBER
     ]],
-    'from' =&gt; [
-        'type' =&gt; 'phone',
-        'number' =&gt; NEXMO_NUMBER
+    <span style="color:#f1fa8c">&#39;from&#39;</span> <span style="color:#ff79c6">=&gt;</span> [
+        <span style="color:#f1fa8c">&#39;type&#39;</span> <span style="color:#ff79c6">=&gt;</span> <span style="color:#f1fa8c">&#39;phone&#39;</span>,
+        <span style="color:#f1fa8c">&#39;number&#39;</span> <span style="color:#ff79c6">=&gt;</span> NEXMO_NUMBER
     ],
-    'ncco' =&gt; [
+    <span style="color:#f1fa8c">&#39;ncco&#39;</span> <span style="color:#ff79c6">=&gt;</span> [
         [
-            'action' =&gt; 'talk',
-            'text' =&gt; 'This is a text to speech call from Nexmo'
+            <span style="color:#f1fa8c">&#39;action&#39;</span> <span style="color:#ff79c6">=&gt;</span> <span style="color:#f1fa8c">&#39;talk&#39;</span>,
+            <span style="color:#f1fa8c">&#39;text&#39;</span> <span style="color:#ff79c6">=&gt;</span> <span style="color:#f1fa8c">&#39;This is a text to speech call from Nexmo&#39;</span>
         ]
     ]
 ]);
 
-print_r($call);
-</code></pre>
+print_r(<span style="color:#8be9fd;font-style:italic">$call</span>);
+</code></pre></div>
+<p>Put this code into <code>index.php</code>, and run it with <code>php -f index.php</code>.</p>
 
 <p>Check out the <a href="https://developer.nexmo.com/voice/voice-api/code-snippets/make-an-outbound-call">code examples in these and other languages</a> on the Nexmo Developer Portal.</p>
 
@@ -484,19 +484,19 @@ print_r($call);
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1569575881"></script>
-    <script src="/js/perfect-scrollbar.min.js?1569575881"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1569575881"></script>
-    <script src="/js/jquery.sticky.js?1569575881"></script>
-    <script src="/js/featherlight.min.js?1569575881"></script>
-    <script src="/js/highlight.pack.js?1569575881"></script>
+    <script src="/js/clipboard.min.js?1571745707"></script>
+    <script src="/js/perfect-scrollbar.min.js?1571745707"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1571745707"></script>
+    <script src="/js/jquery.sticky.js?1571745707"></script>
+    <script src="/js/featherlight.min.js?1571745707"></script>
+    <script src="/js/highlight.pack.js?1571745707"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1569575881"></script>
-    <script src="/js/learn.js?1569575881"></script>
-    <script src="/js/hugo-learn.js?1569575881"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1571745707"></script>
+    <script src="/js/learn.js?1571745707"></script>
+    <script src="/js/hugo-learn.js?1571745707"></script>
 
-    <link href="/mermaid/mermaid.css?1569575881" rel="stylesheet" />
-    <script src="/mermaid/mermaid.js?1569575881"></script>
+    <link href="/mermaid/mermaid.css?1571745707" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1571745707"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

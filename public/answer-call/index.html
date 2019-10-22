@@ -12,20 +12,20 @@
     <title>Call Your Application :: Voice Workshop</title>
 
     
-    <link href="/css/nucleus.css?1569575881" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1569575881" rel="stylesheet">
-    <link href="/css/hybrid.css?1569575881" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1569575881" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1569575881" rel="stylesheet">
-    <link href="/css/auto-complete.css?1569575881" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1569575881" rel="stylesheet">
-    <link href="/css/theme.css?1569575881" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1569575881" rel="stylesheet">
+    <link href="/css/nucleus.css?1571745707" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1571745707" rel="stylesheet">
+    <link href="/css/hybrid.css?1571745707" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1571745707" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1571745707" rel="stylesheet">
+    <link href="/css/auto-complete.css?1571745707" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1571745707" rel="stylesheet">
+    <link href="/css/theme.css?1571745707" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1571745707" rel="stylesheet">
     
-      <link href="/css/theme-blue.css?1569575881" rel="stylesheet">
+      <link href="/css/theme-blue.css?1571745707" rel="stylesheet">
     
 
-    <script src="/js/jquery-3.3.1.min.js?1569575881"></script>
+    <script src="/js/jquery-3.3.1.min.js?1571745707"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -95,14 +95,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1569575881"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1569575881"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1571745707"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1571745707"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/voice-workshop.nexmodev.com\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1569575881"></script>
+<script type="text/javascript" src="/js/search.js?1571745707"></script>
 
     
   </div>
@@ -271,84 +271,84 @@
 
 	
 
-<p>To receive incoming calls, you need a publicly-available URL that will respond with a NCCO telling Nexmo what to do with the call. One thing that&rsquo;s different from the above code is that it does not need an API keys - the Nexmo server will call your application this time rather than the other way around!</p>
+<p><strong>Make a phone call, have your application answer it</strong></p>
 
-<p>Start by adding a simple route to your application, the code samples here are to help you get started, or you can of course improvise.</p>
+<p>To receive incoming calls, you need a publicly-available URL that will respond with a NCCO telling Nexmo what to do with the call. One thing that&rsquo;s different from the previous example is that it does not need an API keys - the Nexmo server will call your application this time rather than the other way around!</p>
+
+<ol>
+<li><p>Start by adding a simple route to your application, the code samples here are to help you get started, or you can of course improvise.</p>
 
 <p><strong>JavaScript</strong></p>
 
 <p>Prepare your dependencies: <code>npm install nexmo express</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#ff79c6">const</span> app <span style="color:#ff79c6">=</span> require(<span style="color:#f1fa8c">&#39;express&#39;</span>)()
 
-<pre><code class="language-js">const app = require('express')()
+<span style="color:#ff79c6">const</span> onInboundCall <span style="color:#ff79c6">=</span> (request, response) =&gt; {
+<span style="color:#ff79c6">const</span> from <span style="color:#ff79c6">=</span> request.query.from
+<span style="color:#ff79c6">const</span> fromSplitIntoCharacters <span style="color:#ff79c6">=</span> from.split(<span style="color:#f1fa8c">&#39;&#39;</span>).join(<span style="color:#f1fa8c">&#39; &#39;</span>)
 
-const onInboundCall = (request, response) =&gt; {
-  const from = request.query.from
-  const fromSplitIntoCharacters = from.split('').join(' ')
+<span style="color:#ff79c6">const</span> ncco <span style="color:#ff79c6">=</span> [{
+    action<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#39;talk&#39;</span>,
+    text<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">`Thank you for calling from </span><span style="color:#f1fa8c">${</span>fromSplitIntoCharacters<span style="color:#f1fa8c">}</span><span style="color:#f1fa8c">`</span>
+}]
 
-  const ncco = [{
-    action: 'talk',
-    text: `Thank you for calling from ${fromSplitIntoCharacters}`
-  }]
-
-  response.json(ncco)
+response.json(ncco)
 }
 
-app.get('/webhooks/answer', onInboundCall)
+app.get(<span style="color:#f1fa8c">&#39;/webhooks/answer&#39;</span>, onInboundCall)
 
-app.listen(3000)
-</code></pre>
-
+app.listen(<span style="color:#bd93f9">3000</span>)
+</code></pre></div>
 <p>Save the code sample to <code>index.js</code> and then run <code>node index.js</code>.</p>
 
 <p><strong>PHP</strong></p>
 
 <p>This example uses the Slim Framework (v3) microframework for some lightweight input/output handling and routing. To include this in your project, use Composer:</p>
 
-<p><code>composer require nexmo/client slim/slim:3.8</code></p>
+<p><code>composer require nexmo/client slim/slim:3.11</code></p>
 
 <p>With the dependencies in place, here&rsquo;s some code to give a <code>/webhooks/answer</code> endpoint that returns an NCCO:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#ff79c6">&lt;?php</span>
+<span style="color:#ff79c6">use</span> \Psr\Http\Message\ServerRequestInterface <span style="color:#ff79c6">as</span> Request;
+<span style="color:#ff79c6">use</span> \Psr\Http\Message\ResponseInterface <span style="color:#ff79c6">as</span> Response;
 
-<pre><code class="language-php">&lt;?php
-use \Psr\Http\Message\ServerRequestInterface as Request;
-use \Psr\Http\Message\ResponseInterface as Response;
+<span style="color:#ff79c6">require</span> <span style="color:#f1fa8c">&#39;vendor/autoload.php&#39;</span>;
 
-require 'vendor/autoload.php';
+<span style="color:#8be9fd;font-style:italic">$app</span> <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">new</span> \Slim\App;
+<span style="color:#8be9fd;font-style:italic">$app</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">get</span>(<span style="color:#f1fa8c">&#39;/webhooks/answer&#39;</span>, <span style="color:#ff79c6">function</span> (Request <span style="color:#8be9fd;font-style:italic">$request</span>, Response <span style="color:#8be9fd;font-style:italic">$response</span>) {
+    <span style="color:#8be9fd;font-style:italic">$params</span> <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">$request</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">getQueryParams</span>();
+    <span style="color:#8be9fd;font-style:italic">$fromSplitIntoCharacters</span> <span style="color:#ff79c6">=</span> implode(<span style="color:#f1fa8c">&#34; &#34;</span>, str_split(<span style="color:#8be9fd;font-style:italic">$params</span>[<span style="color:#f1fa8c">&#39;from&#39;</span>]));
 
-$app = new \Slim\App;
-$app-&gt;get('/webhooks/answer', function (Request $request, Response $response) {
-    $params = $request-&gt;getQueryParams();
-    $fromSplitIntoCharacters = implode(&quot; &quot;, str_split($params['from']));
-
-    $ncco = [
+    <span style="color:#8be9fd;font-style:italic">$ncco</span> <span style="color:#ff79c6">=</span> [
         [
-            'action' =&gt; 'talk',
-            'text' =&gt; 'Thank you for calling from '.$fromSplitIntoCharacters
+            <span style="color:#f1fa8c">&#39;action&#39;</span> <span style="color:#ff79c6">=&gt;</span> <span style="color:#f1fa8c">&#39;talk&#39;</span>,
+            <span style="color:#f1fa8c">&#39;text&#39;</span> <span style="color:#ff79c6">=&gt;</span> <span style="color:#f1fa8c">&#39;Thank you for calling from &#39;</span><span style="color:#ff79c6">.</span><span style="color:#8be9fd;font-style:italic">$fromSplitIntoCharacters</span>
         ]
     ];
 
-    return $response-&gt;withJson($ncco);
+    <span style="color:#ff79c6">return</span> <span style="color:#8be9fd;font-style:italic">$response</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">withJson</span>(<span style="color:#8be9fd;font-style:italic">$ncco</span>);
 });
 
-$app-&gt;run();
-</code></pre>
-
+<span style="color:#8be9fd;font-style:italic">$app</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">run</span>();
+</code></pre></div>
 <p>Save the code into <code>index.php</code>. Then try using the built-in PHP webserver to serve the code:</p>
 
 <p><code>php -S localhost:3000</code></p>
 
-<p>Again, there are <a href="https://developer.nexmo.com/voice/voice-api/code-snippets/receive-an-inbound-call">code examples in other languages</a> if you prefer.</p>
+<p>Again, there are <a href="https://developer.nexmo.com/voice/voice-api/code-snippets/receive-an-inbound-call">code examples in other languages</a> if you prefer.</p></li>
 
-<p><strong>Test your endpoint</strong> by requesting <a href="http://localhost:3000/webhook/answer">http://localhost:3000/webhook/answer</a> in your browser. You should see some JSON returned.</p>
+<li><p><strong>Test your endpoint</strong> by requesting <a href="http://localhost:3000/webhook/answer">http://localhost:3000/webhook/answer</a> in your browser. You should see some JSON returned.</p></li>
 
-<p>Next, your local URL needs to be publicly available. One way to do this is to use <a href="https://ngrok.com">ngrok</a>:</p>
+<li><p>Next, your local URL needs to be publicly available. One way to do this is to use <a href="https://ngrok.com">ngrok</a>:</p>
 
 <p><code>ngrok http 3000</code></p>
 
-<p>When ngrok starts the tunnel, it will show you your URL, something like <code>https://abc123.ngrok.io</code> - copy this.</p>
+<p>When ngrok starts the tunnel, it will show you your URL, something like <code>https://abc123.ngrok.io</code> - copy the URL from your ngrok console as we will need it shortly.</p></li>
 
-<p>Back in the dashboard, you can edit the Answer URL of your application, by pasting the ngrok URL and adding <code>/webhooks/answer</code> to the end of it, to make something like <a href="https://abc123.ngrok.com/webhooks/answer">https://abc123.ngrok.com/webhooks/answer</a>.</p>
+<li><p>Back in the dashboard, you can edit the Answer URL of your application, by pasting the ngrok URL and adding <code>/webhooks/answer</code> to the end of it, to make something like <code>https://abc123.ngrok.com/webhooks/answer</code>.</p></li>
 
-<p><strong>Call your application</strong> by making a call from your cellphone to the Nexmo number linked to your application. You should hear the spoken greeting giving the number you are calling from.</p>
+<li><p><strong>Call your application</strong> by making a call from your cellphone to the Nexmo number linked to your application. You should hear the spoken greeting giving the number you are calling from.</p></li>
+</ol>
 
 <h3 id="next-steps-a-more-interesting-greeting">Next Steps: A more interesting greeting</h3>
 
@@ -356,7 +356,7 @@ $app-&gt;run();
 
 <ul>
 <li>A talking clock</li>
-<li>A random uplifting message</li>
+<li>A randomly chosen uplifting message</li>
 <li>Some music</li>
 </ul>
 
@@ -475,19 +475,19 @@ $app-&gt;run();
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1569575881"></script>
-    <script src="/js/perfect-scrollbar.min.js?1569575881"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1569575881"></script>
-    <script src="/js/jquery.sticky.js?1569575881"></script>
-    <script src="/js/featherlight.min.js?1569575881"></script>
-    <script src="/js/highlight.pack.js?1569575881"></script>
+    <script src="/js/clipboard.min.js?1571745707"></script>
+    <script src="/js/perfect-scrollbar.min.js?1571745707"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1571745707"></script>
+    <script src="/js/jquery.sticky.js?1571745707"></script>
+    <script src="/js/featherlight.min.js?1571745707"></script>
+    <script src="/js/highlight.pack.js?1571745707"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1569575881"></script>
-    <script src="/js/learn.js?1569575881"></script>
-    <script src="/js/hugo-learn.js?1569575881"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1571745707"></script>
+    <script src="/js/learn.js?1571745707"></script>
+    <script src="/js/hugo-learn.js?1571745707"></script>
 
-    <link href="/mermaid/mermaid.css?1569575881" rel="stylesheet" />
-    <script src="/mermaid/mermaid.js?1569575881"></script>
+    <link href="/mermaid/mermaid.css?1571745707" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1571745707"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>
