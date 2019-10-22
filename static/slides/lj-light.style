@@ -20,7 +20,7 @@ pageTemplates:
     coverPage:
         frames: []
             [15%, 10%, 70%, 80%]
-        background: images/white.jpg
+        background: images/phone-slide.png
         showHeader: false
         showFooter: false
 
@@ -39,10 +39,26 @@ pageTemplates:
         showFooter: true
         alignment: TA_CENTER
 
-    mapPage:
+    stepsPage:
         frames: []
-            [2%, 1%, 98%, 92%]
-        background: images/whinlatter3.png
+            [3%, 3%, 94%, 75%]
+        background: images/steps-slide.png
+        showHeader: false
+        showFooter: true
+        alignment: TA_CENTER
+
+    signpostPage:
+        frames: []
+            [3%, 3%, 94%, 75%]
+        background: images/signpost-slide.png
+        showHeader: false
+        showFooter: true
+        alignment: TA_CENTER
+
+    comboPage:
+        frames: []
+            [3%, 3%, 94%, 75%]
+        background: images/ss-slide.png
         showHeader: false
         showFooter: true
         alignment: TA_CENTER

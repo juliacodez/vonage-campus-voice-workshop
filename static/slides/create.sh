@@ -13,7 +13,7 @@ rst2pdf ${FILE}.rst \
     --output=${FILE}.pdf
 
 python notes.py ${FILE}.pdf > notes.rst
-rst2pdf notes.rst -s "notes.style"
+rst2pdf notes.rst -s "twocolumn,notes.style"
 
 pdfjam --suffix handout --nup '4x3' --frame 'true' --noautoscale 'false' --delta '0.2cm 2cm' --scale '0.9' --landscape -- ${FILE}.pdf -
 

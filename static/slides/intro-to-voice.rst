@@ -37,7 +37,7 @@ Workshop plan:
 .. Change to a title page
 .. raw:: pdf
 
-    PageBreak titlePage
+    PageBreak stepsPage
 
 NCCO
 ====
@@ -57,9 +57,11 @@ A series of steps: e.g. text-to-speech
   [
     {
       "action": "talk",
-      "text": "You are listening to a Call made with Voice API"
+      "text": "You are listening to a call made with Nexmo Voice API"
     }
   ]
+
+|
 
 |
 
@@ -71,9 +73,9 @@ You can find a full reference here: https://developer.nexmo.com/voice/voice-api/
 
     TextAnnotation "NCCOs can contain multiple objects in the array, they are done in order and then the call ends when there are no more"
 
-    TextAnnotation "DEMO: Open the NCCO reference page from developer.nexmo.com to encourage people"
+    TextAnnotation "**DEMO:** Open the NCCO reference page from developer.nexmo.com to encourage people"
 
-    TextAnnotation "Examples are on the next slide, feel free to name drop audio, DTMF input, recording ... but don't go mad"
+    TextAnnotation "(list of examples on next slide, don't list here)"
 
 
 NCCO: Nexmo Call Control Object
@@ -92,11 +94,11 @@ Elements in an NCCO may include:
 
   TextAnnotation "Emphasise that these are really important at every stage of voice call applications!"
 
-  TextAnnotation "Recordings: start the recording, include a recording_url. When complete, webhook goes to recording_url with a URL you can download if you are signed in (there are examples in today's exercises)."
+  TextAnnotation "Recordings: start with NCCO, webhook on completion with download link. This is in one of today's stretch goals"
 
   TextAnnotation "Audio should be hosted on a public URL, such as S3"
 
-  TextAnnotation "DTMF you ask for input, and give the URL to send info to. That URL (synchronously) returns a new NCCO in response to the given data."
+  TextAnnotation "DTMF you ask for input, and give the URL to send a webhook to with digits in. That URL (synchronously) returns a new NCCO in response to the given data."
 
   TextAnnotation "Call vs Conferences is the next slide"
 
@@ -129,7 +131,7 @@ There are two types of conversation that you might use:
 .. Change to a title page
 .. raw:: pdf
 
-    PageBreak titlePage
+    PageBreak signpostPage
 
 Nexmo Voice API
 ===============
@@ -144,7 +146,7 @@ Nexmo Voice API
 
 Make an API call to:
 
-* make an outgoing call (we'll do this in a bit)
+* make an outgoing call (our first hands-on exercise today)
 * hang up a call
 * transfer a call
 * interact with an in-progress call
@@ -173,12 +175,12 @@ You will find lots of code examples and the API reference on https://developer.n
 
   TextAnnotation "Code samples on Nexmo Developer have cURL as well so if you're not using a lib, check those"
 
-  TextAnnotation "For exploring the APIs, grab the OpenAPI spec and import into Postman. This makes a great demo if you have postman installed! Download the OAS, go to 'import' above collections, import file, choose your file, and you get a new collection"
+  TextAnnotation "For exploring the APIs, grab the OpenAPI spec and import into Postman. **DEMO** but no API calls (you need a JWT). Video of this also available"
 
 .. Change to a title page
 .. raw:: pdf
 
-    PageBreak titlePage
+    PageBreak comboPage
 
 NCCO + API = Many Good Things
 =============================
@@ -256,7 +258,7 @@ Webhooks can be expected:
 
 .. raw:: pdf
 
-  TextAnnotation "Answer webhook when someone calls your Nexmo number. Nexmo servers hit your URL and you return an NCCO"
+  TextAnnotation "Answer webhook when someone calls your Nexmo number. Nexmo servers hit your URL and you return an NCCO."
 
   TextAnnotation "Events show up at the ``event_url``. This is great for knowing what is going on - errors go there too!"
 
@@ -264,7 +266,7 @@ Webhooks can be expected:
 
   TextAnnotation "When recording is ready, webhook to ``recording_url`` has a link to the file to download"
 
-  TextAnnotation "``notify`` is an NCCO action that sends a webhook to a URL. The NCCO continues afterwards, useful for progress indicators"
+  TextAnnotation "``notify`` is an NCCO action that sends a webhook to a URL. The NCCO continues afterwards, useful for progress indicators - or you can return an NCCO"
 
   TextAnnotation "There are some tricks to working with webhooks locally: I'd like to share some tips"
 
@@ -356,19 +358,20 @@ https://github.com/Nexmo/voice-event-logger - it can be run locally or deployed 
 
 .. raw:: pdf
 
-  TextAnnotation "A very basic debugging tool to get you started. In a 'real' application you would want to handle the events yourself."
-
-Pieces of the Voice API
-=======================
-
-.. image:: images/api-diag.JPG
-  :width: 14cm
+  TextAnnotation "A very basic debugging tool to get you started. In a real application you would want to handle the events yourself."
 
 Further Reading
 ===============
 
 * Exercises at https://voice-workshop.nexmodev.com/
+* Developer portal https://developer.nexmo.com
+* Tutorials for Voice API https://developer.nexmo.com/voice/voice-api/use-cases/
 * Our blog https://nexmo.com/blog
 * Tell us what you think! ``@NexmoDev`` on twitter
 
+.. raw:: pdf
+
+  TextAnnotation "The exercises are the rest of the session. Please use the time! Ask us anything!"
+
+  TextAnnotation "Any tech stack will do"
 
