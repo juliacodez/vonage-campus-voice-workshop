@@ -20,7 +20,7 @@ pageTemplates:
     coverPage:
         frames: []
             [15%, 10%, 70%, 80%]
-        background: images/phone-slide.png
+        background: images/signpost-slide.png
         showHeader: false
         showFooter: false
 
@@ -41,7 +41,7 @@ pageTemplates:
 
     stepsPage:
         frames: []
-            [3%, 3%, 94%, 75%]
+            [1%, 3%, 99%, 75%]
         background: images/steps-slide.png
         showHeader: false
         showFooter: true

@@ -7,7 +7,7 @@ Getting Started with Voice API
 
 .. class:: titleslideinfo
 
-    Lorna Mitchell, Developer Relations
+    Lorna Mitchell
 
 .. Change to a standard page
 .. raw:: pdf
@@ -39,8 +39,8 @@ Workshop plan:
 
     PageBreak stepsPage
 
-NCCO
-====
+NCCO: Nexmo Call Control Object
+===============================
 
 .. Change to a standard page
 .. raw:: pdf
@@ -87,7 +87,7 @@ Elements in an NCCO may include:
 - playing audio (optionally looping)
 - recording a call
 - accepting DTMF input
-- transferring a call (to a conversation, or a new NCCO)
+- transferring a call (to a conference, or a new NCCO)
 - ... and much more
 
 .. raw:: pdf
@@ -156,10 +156,10 @@ Make an API call to:
 
   TextAnnotation "Make the distinction between the NCCO (supplied when the call is started/answered) and the API which operates on the in-progress call and can change things even during the course of an NCCO."
 
-The Voice API
-=============
+How to Use Voice API
+====================
 
-The Voice API is an HTTP API so you can access it in many different ways:
+The Voice API is an HTTP API
 
 * Explore the API with Postman or your favorite HTTP client
 * Use ``request(s)`` or whichever library you prefer in your application
@@ -222,23 +222,21 @@ Voice API Examples
 Voice Webhooks
 ==============
 
-* Webhooks are events over HTTP
-
-* Nexmo sends information about events and changes in call state as they happen
-
-* These events are webhooks: incoming HTTP requests
-  
-* Your application needs to be able to receive requests and respond
+Data to your application from Nexmo
 
 |
 
-The URL is set up in advance, as part of the application configuration
+* Webhooks are events sent via HTTP request to an endpoint in your application
+  
+* Your application needs to be able to receive requests and respond
 
 .. raw:: pdf
 
-  TextAnnotation "Think of it as a load of pings and beeps to let you know things are happening :)"
+  TextAnnotation "(This is almost a title slide, third and final part of the puzzle)"
 
-  TextAnnotation "As well as making API calls, handling webhooks needs your application to receive incoming requests. We'll talk about how to do that on dev platforms in two slides' time"
+  TextAnnotation "Webhooks are the link we've missed so far. Things happen, we let your app know"
+
+  TextAnnotation "Updates on status, and payloads in response to events"
 
   TextAnnotation "Must ack the webhook, in a specific timeframe. Nexmo will retry if not"
 
@@ -267,6 +265,46 @@ Webhooks can be expected:
   TextAnnotation "When recording is ready, webhook to ``recording_url`` has a link to the file to download"
 
   TextAnnotation "``notify`` is an NCCO action that sends a webhook to a URL. The NCCO continues afterwards, useful for progress indicators - or you can return an NCCO"
+
+
+The Answer Webhook
+==================
+
+When someone calls your Nexmo number, you get a webhook like this:
+
+.. code:: json
+
+  {
+    "from": "442079460000",
+    "to": "447700900000",
+    "uuid": "aaaaaaaa-bbbb-cccc-dddd-0123456789ab",
+    "conversation_uuid": "CON-aaaaaaaa-bbbb-cccc-dddd-0123456789ab"
+  }
+
+|
+
+Your code must return a valid NCCO
+
+.. raw:: pdf
+
+  TextAnnotation "Compare with when we do an outgoing call, we can either specify an ``answer_url`` and serve an NCCO, or provide the NCCO when making the call"
+
+The Event Webhook
+=================
+
+Many different events can produce webhooks to the ``event_url``:
+
+* Changes in call state e.g. "ringing"/"answered"
+* ``record`` and ``input`` actions can specify a URL, which may be the same as the event URL
+* Errors will also be sent to the ``event_url``
+
+|
+
+Detailed reference: https://developer.nexmo.com/voice/voice-api/webhook-reference#event-webhook
+
+.. raw:: pdf
+
+  TextAnnotation "Make sure in your own applications that you are capturing this stuff somewhere. Interesting for success, but vital for debugging"
 
   TextAnnotation "There are some tricks to working with webhooks locally: I'd like to share some tips"
 
@@ -312,41 +350,6 @@ We have a blog post about this: https://www.nexmo.com/blog/2017/07/04/local-deve
 
   TextAnnotation "Encourage people to download/install while I'm talking ..."
 
-The Answer Webhook
-==================
-
-When someone calls your Nexmo number, you get a webhook like this:
-
-.. code:: json
-
-  {
-    "from": "442079460000",
-    "to": "447700900000",
-    "uuid": "aaaaaaaa-bbbb-cccc-dddd-0123456789ab",
-    "conversation_uuid": "CON-aaaaaaaa-bbbb-cccc-dddd-0123456789ab"
-  }
-
-|
-
-Your code must return a valid NCCO
-
-.. raw:: pdf
-
-  TextAnnotation "Compare with when we do an outgoing call, we can either specify an ``answer_url`` and serve an NCCO, or provide the NCCO when making the call"
-
-The Event Webhook
-=================
-
-Many different events can produce webhooks to the ``event_url``:
-
-* Changes in call state e.g. "ringing"/"answered"
-* ``record`` and ``input`` actions can specify a URL, which may be the same as the event URL
-* Errors will also be sent to the ``event_url``
-
-|
-
-Detailed reference: https://developer.nexmo.com/voice/voice-api/webhook-reference#event-webhook
-
 Voice Events Logger
 ===================
 
@@ -375,3 +378,4 @@ Further Reading
 
   TextAnnotation "Any tech stack will do"
 
+  TextAnnotation "Open the exercises, ask people to ask for help!"
