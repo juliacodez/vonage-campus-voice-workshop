@@ -9,7 +9,7 @@ You will need:
 
 * A Nexmo account if you don't have one already. Sign up here: <https://dashboard.nexmo.com/sign-up>
 * A Nexmo phone number to make calls with. You can [check your existing numbers](https://dashboard.nexmo.com/your-numbers) and [buy numbers](https://dashboard.nexmo.com/buy-numbers) on the dashboard.
-* An application - you need both the application UUID and the private key file copied somewhere safe. From the [dashboard](https://dashboard.nexmo.com), visit "Voice" and then "Create an application". Give your new application a name (you can use `example.com` URLs for now, we will update these later) and save it. Once created, on the Numbers tab you can link the Nexmo number you will use with this application.
+* An application - you need both the application UUID and the private key file copied somewhere safe. From the [dashboard](https://dashboard.nexmo.com), visit "Voice" and then "Create an application". Give your new application a name and choose "Generate public and private key"; your browser will download the private key. Set your application to have Voice capabilities (you can use `example.com` URLs for now, we will update these later) and save it. Once you have created the application, link the Nexmo number you will use.
 * A number you can phone (probably your cellphone).
 * Some sort of working tech stack. Our examples are NodeJS and PHP but you should feel free to use whatever technology you know how to make API calls with!
 
