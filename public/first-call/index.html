@@ -279,7 +279,7 @@
 <ul>
 <li>A Nexmo account if you don&rsquo;t have one already. Sign up here: <a href="https://dashboard.nexmo.com/sign-up">https://dashboard.nexmo.com/sign-up</a></li>
 <li>A Nexmo phone number to make calls with. You can <a href="https://dashboard.nexmo.com/your-numbers">check your existing numbers</a> and <a href="https://dashboard.nexmo.com/buy-numbers">buy numbers</a> on the dashboard.</li>
-<li>An application - you need both the application UUID and the private key file copied somewhere safe. From the <a href="https://dashboard.nexmo.com">dashboard</a>, visit &ldquo;Voice&rdquo; and then &ldquo;Create an application&rdquo;. Give your new application a name (you can use <code>example.com</code> URLs for now, we will update these later) and save it. Once created, on the Numbers tab you can link the Nexmo number you will use with this application.</li>
+<li>An application - you need both the application UUID and the private key file copied somewhere safe. From the <a href="https://dashboard.nexmo.com">dashboard</a>, visit &ldquo;Voice&rdquo; and then &ldquo;Create an application&rdquo;. Give your new application a name and choose &ldquo;Generate public and private key&rdquo;; your browser will download the private key. Set your application to have Voice capabilities (you can use <code>example.com</code> URLs for now, we will update these later) and save it. Once you have created the application, link the Nexmo number you will use.</li>
 <li>A number you can phone (probably your cellphone).</li>
 <li>Some sort of working tech stack. Our examples are NodeJS and PHP but you should feel free to use whatever technology you know how to make API calls with!</li>
 </ul>
@@ -329,7 +329,7 @@ nexmo.calls.create({
 
 <p>Prepare your dependencies: <code>composer require nexmo/client</code></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#ff79c6">&lt;?php</span>
-<span style="color:#ff79c6">require</span> <span style="color:#f1fa8c">&#39;/vendor/autoload.php&#39;</span>;
+<span style="color:#ff79c6">require</span> <span style="color:#f1fa8c">&#39;vendor/autoload.php&#39;</span>;
 
 <span style="color:#8be9fd;font-style:italic">$keypair</span> <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">new</span> \Nexmo\Client\Credentials\Keypair(
     file_get_contents(NEXMO_APPLICATION_PRIVATE_KEY_PATH),
