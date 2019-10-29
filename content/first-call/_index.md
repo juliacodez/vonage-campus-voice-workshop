@@ -59,7 +59,7 @@ Prepare your dependencies: `composer require nexmo/client`
 
 ```php
 <?php
-require '/vendor/autoload.php';
+require 'vendor/autoload.php';
 
 $keypair = new \Nexmo\Client\Credentials\Keypair(
     file_get_contents(NEXMO_APPLICATION_PRIVATE_KEY_PATH),
