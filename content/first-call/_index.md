@@ -7,95 +7,71 @@ weight : 15
 
 You will need:
 
-* A Nexmo account if you don't have one already. Sign up here: <https://dashboard.nexmo.com/sign-up>
-* A Nexmo phone number to make calls with. You can [check your existing numbers](https://dashboard.nexmo.com/your-numbers) and [buy numbers](https://dashboard.nexmo.com/buy-numbers) on the dashboard.
-* An application - you need both the application UUID and the private key file copied somewhere safe. From the [dashboard](https://dashboard.nexmo.com), visit "Voice" and then "Create an application". Give your new application a name and choose "Generate public and private key"; your browser will download the private key. Set your application to have Voice capabilities (you can use `example.com` URLs for now, we will update these later) and save it. Once you have created the application, link the Nexmo number you will use.
+* A Vonage account if you don't have one already. Sign up here: <https://dashboard.nexmo.com/sign-up>
+* A Vonage phone number to make calls with. You can [check your existing numbers](https://dashboard.nexmo.com/your-numbers) and [buy numbers](https://dashboard.nexmo.com/buy-numbers) on the dashboard.
+* An application - you need both the application UUID and the private key file copied somewhere safe. From the [dashboard](https://dashboard.nexmo.com), visit "Your applications" and then "Create a new application". Give your new application a name and choose "Generate public and private key"; your browser will download the private key. Set your application to have Voice capabilities (you can use `example.com` URLs for now, we will update these later) and save it. Once you have created the application, link the Vonage number you will use.
 * A number you can phone (probably your cellphone).
-* Some sort of working tech stack. Our examples are NodeJS and PHP but you should feel free to use whatever technology you know how to make API calls with!
+* Some sort of working tech stack. Our examples are NodeJS but you should feel free to use whatever technology you know how to make API calls with!
 
 Optional, but recommended:
 
-* The [Nexmo CLI tool](https://developer.nexmo.com/tools) may be a nicer way to work with the number purchase, application creation, etc.
-* The [Server SDK](https://developer.nexmo.com/tools) for your tech stack - we have PHP, Python, Ruby, NodeJS, Java, .NET (and a semi-official [Go SDK](https://github.com/nexmo-community/nexmo-go))
+* The [CLI tool](https://developer.nexmo.com/tools) may be a nicer way to work with the number purchase, application creation, etc.
+* The [Server SDK](https://developer.nexmo.com/tools) for your tech stack - we have PHP, Python, Ruby, NodeJS, Java, .NET and a semi-official [Go SDK](https://github.com/nexmo-community/nexmo-go))
 
 Here's the code to get you started, replace the placeholder values in your chosen code:
 
- * `NEXMO_APPLICATION_PRIVATE_KEY_PATH`: The path to the private key file you saved when creating the application
- * `NEXMO_APPLICATION_ID`: The UUID of your application
- * `NEXMO_NUMBER`: Your Nexmo number that the call will be made from. For example `447700900000`.
+ * `VONAGE_APPLICATION_PRIVATE_KEY_PATH`: The path to the private key file you saved when creating the application
+ * `VONAGE_APPLICATION_ID`: The UUID of your application
+ * `VONAGE_NUMBER`: Your Vonage number that the call will be made from. For example `447700900000`.
  * `TO_NUMBER`: The number you would like to call to in [E.164](https://en.wikipedia.org/wiki/E.164) format. For example `447700900001` (note that this _must_ include the dialling code, so if it's a US number, it should start with `1`).
 
-**Javascript**
+Prepare your dependencies: `npm install @vonage/server-sdk`
 
-Prepare your dependencies: `npm install nexmo`
+Add `"type": "module"` in package.json to enable imports.
+
+```json
+{
+  "dependencies": {
+    "@vonage/server-sdk": "^2.10.8"
+  },
+  "type": "module"
+}
+```
 
 ```js
-const nexmo = new Nexmo({
-  apiKey: NEXMO_API_KEY,
-  apiSecret: NEXMO_API_SECRET,
-  applicationId: NEXMO_APPLICATION_ID,
-  privateKey: NEXMO_APPLICATION_PRIVATE_KEY_PATH
+import Vonage from "@vonage/server-sdk"
+
+const vonage = new Vonage({
+    apiKey: VONAGE_API_KEY,
+    apiSecret: VONAGE_API_SECRET,
+    applicationId: VONAGE_APPLICATION_ID,
+    privateKey: VONAGE_APPLICATION_PRIVATE_KEY_PATH
 })
 
-nexmo.calls.create({
-  to: [{
-    type: 'phone',
-    number: TO_NUMBER
-  }],
-  from: {
-    type: 'phone',
-    number: NEXMO_NUMBER
-  },
-  ncco: [{
-    "action": "talk",
-    "text": "This is a text to speech call from Nexmo"
-  }]
-})
+vonage.calls.create({
+    to: [{
+      type: 'phone',
+      number: TO_NUMBER
+    }],
+    from: {
+      type: 'phone',
+      number: VONAGE_NUMBER
+    },
+    ncco: [{
+      "action": "talk",
+      "text": "This is a text to speech call from Vonage"
+    }]
+  }, (error, response) => {
+    if (error) console.error(error)
+    if (response) console.log(response)
+  })
 ```
-
-**PHP**
-
-Prepare your dependencies: `composer require nexmo/client`
-
-```php
-<?php
-require 'vendor/autoload.php';
-
-$keypair = new \Nexmo\Client\Credentials\Keypair(
-    file_get_contents(NEXMO_APPLICATION_PRIVATE_KEY_PATH),
-    NEXMO_APPLICATION_ID
-);
-$client = new \Nexmo\Client($keypair);
-
-$call = $client->calls()->create([
-    'to' => [[
-        'type' => 'phone',
-        'number' => TO_NUMBER
-    ]],
-    'from' => [
-        'type' => 'phone',
-        'number' => NEXMO_NUMBER
-    ],
-    'ncco' => [
-        [
-            'action' => 'talk',
-            'text' => 'This is a text to speech call from Nexmo'
-        ]
-    ]
-]);
-
-print_r($call);
-```
-
-Put this code into `index.php`, and run it with `php -f index.php`.
-
-Check out the [code examples in these and other languages](https://developer.nexmo.com/voice/voice-api/code-snippets/make-an-outbound-call) on the Nexmo Developer Portal.
 
 **Run your code** and answer your phone!
 
 ### Next Steps: Customise your call
 
-What would you like to hear? Check out our [NCCO reference documentation](https://developer.nexmo.com/voice/voice-api/ncco-reference) to learn what else you can do, if you'd like your spoken greeting to have a bit more expression you can investigate [SSML (Speech Synthesis Markup Language)](https://developer.nexmo.com/voice/voice-api/guides/customizing-tts).
+What would you like to hear? Check out our [NCCO reference documentation](https://developer.vonage.com/voice/voice-api/ncco-reference) to learn what else you can do, if you'd like your spoken greeting to have a bit more expression you can investigate [SSML (Speech Synthesis Markup Language)](https://developer.vonage.com/voice/voice-api/guides/customizing-tts).
 
 ### Next Steps: Track events (insight and debugging tactic)
 

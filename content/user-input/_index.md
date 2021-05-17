@@ -8,117 +8,71 @@ Making a call, or receiving one, is great but what next? In this final exercise 
 
 The outline of the process looks something like this:
 
-1. Create an NCCO to prompt the user to input some digits by using a [`talk`](https://developer.nexmo.com/voice/voice-api/ncco-reference#talk) action and then an [`input`](https://developer.nexmo.com/voice/voice-api/ncco-reference#input) action. The `input` action accepts a URL so use your ngrok URL with a suffix - our examples use `/webhooks/dtmf`.
-2. When the user sends some input, we'll receive a webhook containing some data to identify the call (see the [detail of the webhook](https://developer.nexmo.com/voice/voice-api/webhook-reference#input) on the Developer Portal)
+1. Create an NCCO to prompt the user to input some digits by using a [`talk`](https://developer.vonage.com/voice/voice-api/ncco-reference#talk) action and then an [`input`](https://developer.vonage.com/voice/voice-api/ncco-reference#input) action. The `input` action accepts a URL so use your ngrok URL with a suffix - our examples use `/webhooks/dtmf`.
+2. When the user sends some input, we'll receive a webhook containing some data to identify the call (see the [detail of the webhook](https://developer.vonage.com/voice/voice-api/webhook-reference#input) on the Developer Portal)
 3. Using the data that arrived in the webhook, we can return a new NCCO with custom content.
 
 Start a new application, we have some new code for you!
 
-**JavaScript**
-
-Prepare your dependencies: `npm install nexmo express body-parser`
+Prepare your dependencies: `npm install @vonage/server-sdk express`
 
 ```js
-const app = require('express')()
-const bodyParser = require('body-parser')
+import express from 'express'
+const PORT = 3000
+//destructuring
+const {
+    json
+} = express;
+//instantiate the Express app
+const app = express()
 
-app.use(bodyParser.json())
+app.use(json())
 
 const onInboundCall = (request, response) => {
-  const ncco = [
-    {
-      action: 'talk',
-      text: 'Please enter a digit'
-    },
-    {
-      action: 'input',
-      eventUrl: [`${request.protocol}://${request.get('host')}/webhooks/dtmf`]
-    }
-  ]
+    const ncco = [{
+            action: 'talk',
+            text: 'Please enter a digit'
+        },
+        {
+            action: 'input',
+            eventUrl: [`${request.protocol}://${request.get('host')}/webhooks/dtmf`]
+        }
+    ]
 
-  response.json(ncco)
+    response.json(ncco)
 }
 
 const onInput = (request, response) => {
-  const dtmf = request.body.dtmf
+    const dtmf = request.body.dtmf
 
-  const ncco = [{
-    action: 'talk',
-    text: `You pressed ${dtmf}`
-  }]
+    const ncco = [{
+        action: 'talk',
+        text: `You pressed ${dtmf}`
+    }]
 
-  response.json(ncco)
+    response.json(ncco)
 }
 
 app
-  .get('/webhooks/answer', onInboundCall)
-  .post('/webhooks/dtmf', onInput)
+    .get('/webhooks/answer', onInboundCall)
+    .post('/webhooks/dtmf', onInput)
 
-app.listen(3000)
+app.listen(3000, () => {
+    console.log('Server listening at http://localhost:3000')
+})
 ```
 
-Put this code into `index.js` and start the server with `node index.js`.
+Put this code into `user-input.js` and start the server with `node user-input.js`.
 
-**PHP**
-
-Again, there is a Slim Framework dependency so use `composer require slim/slim:3.11` to bring that into your project.
-
-```php
-<?php
-use \Psr\Http\Message\ServerRequestInterface as Request;
-use \Psr\Http\Message\ResponseInterface as Response;
-
-require 'vendor/autoload.php';
-
-$app = new \Slim\App;
-
-$app->get('/webhooks/answer', function (Request $request, Response $response) {
-    $uri = $request->getUri();
-    $ncco = [
-        [
-            'action' => 'talk',
-            'text' => 'Please enter a digit'
-        ],
-        [
-            'action' => 'input',
-            'eventUrl' => [
-                $uri->getScheme().'://'.$uri->getHost().':'.$uri->getPort().'/webhooks/dtmf'
-            ]
-        ]
-    ];
-
-    return $response->withJson($ncco);
-});
-
-$app->post('/webhooks/dtmf', function (Request $request, Response $response) {
-    $params = $request->getParsedBody();
-
-    $ncco = [
-        [
-            'action' => 'talk',
-            'text' => 'You pressed '.$params['dtmf']
-        ]
-    ];
-
-    return $response->withJson($ncco);
-});
-
-$app->run();
-```
-
-Place this code in `index.php`, then use the built-in webserver:
-
-`php -S localhost:3000`
-
-**Run your code** - if your ngrok server is still running from the previous example then you should be able to simply call your Nexmo number from your cellphone again. Don't forget to bring up the dial pad ready to enter a digit!
+**Run your code** - if your ngrok server is still running from the previous example then you should be able to simply call your Vonage number from your cellphone again. Don't forget to bring up the dial pad ready to enter a digit!
 
 ### Next Steps: Expand to make a simple IVR
 
-How about expanding your example to make a small IVR (Interactive Voice Response) system? "Press one for sales, two for support ..." you get the idea. Or go sillier and base something on my colleague Tony's [Dial-a-Carol system](https://www.nexmo.com/blog/2018/12/03/dial-a-christmas-carol-with-nexmo-and-python-dr)!
+How about expanding your example to make a small IVR (Interactive Voice Response) system? "Press one for sales, two for support ..." you get the idea. Or go sillier and base something on my colleague Tony's [Dial-a-Carol system](https://learn.vonage.com/blog/2018/12/03/dial-a-christmas-carol-with-nexmo-and-python-dr/)!
 
 ### Next Steps: Record the Call
 
-Nexmo enables call recording, which is useful in many different applications. Take a look at the [NCCO documentation for the `record` action](https://developer.nexmo.com/voice/voice-api/ncco-reference#record) and record the call.
+Vonage enables call recording, which is useful in many different applications. Take a look at the [NCCO documentation for the `record` action](https://developer.vonage.com/voice/voice-api/ncco-reference#record) and record the call.
 
 You need to be authenticated to be able to download the call recording - check the first example we did for how to create the client with the application and key you need. There are also code examples [on the developer portal](https://developer.nexmo.com/voice/voice-api/code-snippets/download-a-recording) to help you along.
 
